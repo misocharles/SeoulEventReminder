@@ -15,10 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 import android.os.AsyncTask;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class PostJsonTask extends AsyncTask<String, Void, String> {
 	private final Logger log = Logger.getLogger(this.getClass());
 	private String type = "";
@@ -79,7 +75,7 @@ public class PostJsonTask extends AsyncTask<String, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		if (this.type.equals("login") && result != null) {
-			ObjectMapper om = new ObjectMapper();
+			/*ObjectMapper om = new ObjectMapper();
 			Map<String, String> map = null;
 			try {
 				map = om.readValue(result, Map.class);
@@ -92,7 +88,7 @@ public class PostJsonTask extends AsyncTask<String, Void, String> {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				log.error(e);
-			}
+			}*/
 		}
 	}
 }
