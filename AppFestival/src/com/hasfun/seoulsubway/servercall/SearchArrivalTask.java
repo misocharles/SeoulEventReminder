@@ -1,4 +1,4 @@
-package com.hasfun.seoulsubway.common;
+package com.hasfun.seoulsubway.servercall;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
 import com.hasfun.seoulsubway.R;
+import com.hasfun.seoulsubway.common.IPublicApiResult;
 import com.hasfun.seoulsubway.dto.ArrivalTimeDTO;
 
 public class SearchArrivalTask extends AsyncTask<String, Void, String> {
@@ -25,6 +26,7 @@ public class SearchArrivalTask extends AsyncTask<String, Void, String> {
 	private String url = "";
 	private ArrivalTimeDTO arrivalTimeDTO = null;
 	private IPublicApiResult iPublicApiResult = null; 
+	private String stationCode = null;
 	@Override
 	protected void onPreExecute() {
 		log.info("onPreExecute");
@@ -45,7 +47,7 @@ public class SearchArrivalTask extends AsyncTask<String, Void, String> {
 		try {
 			String serverString = "";
 			String url = "http://openapi.seoul.go.kr:8088/4150495f32313130626967656e697573/json/SearchArrivalTimeOfLine2SubwayByIDService/1/1";
-			String stationCode = params[0];
+			this.stationCode = params[0];
 			String inout = params[1]; 
 			String daytype = params[2];
 			String finalUrl = url + "/" + stationCode + "/" + inout + "/" + daytype;
@@ -67,6 +69,7 @@ public class SearchArrivalTask extends AsyncTask<String, Void, String> {
 	protected void onPostExecute(String result) {
 		try {
 			arrivalTimeDTO = new ArrivalTimeDTO();
+			arrivalTimeDTO.setStation(this.stationCode);
 			ArrayList<ArrivalTimeDTO.InnerData> innerDataList = arrivalTimeDTO.getInnerdataList(); 
 			JSONObject rawData = new JSONObject(result);
 			JSONObject arrivalData = (JSONObject) rawData.get(ArrivalTimeDTO.SearchArrivalTimeOfLine2SubwayByIDService);
