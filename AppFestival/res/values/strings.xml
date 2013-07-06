@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">AppFestival</string>
+    <string name="app_name">Seoul Event Reminder</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+	<string name="esdk__loading">Loading...</string>
+	<string name="empty_content_error">Note title and content cannot be empty</string>
+	<string name="title">Note Title</string>
+    <string name="content">Note Content</string>
+	<string name="label_save_button">Save</string>
+    <string name="label_select_notebook_button">Select Notebook</string>
+    <string name="note_saved">Note saved to Evernote</string>
+    <string name="error_saving_note">Error saving note</string>
+    <string name="error_creating_notestore">Error creating notestore</string>
+    <string name="error_listing_notebooks">Error listing notebooks</string>
+    <string name="ok">Ok</string>
 </resources>
