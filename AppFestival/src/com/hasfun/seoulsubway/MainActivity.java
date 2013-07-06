@@ -1,11 +1,5 @@
 package com.hasfun.seoulsubway;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapPolyline;
@@ -27,15 +21,12 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import com.hasfun.seoulsubway.common.Constants;
-import com.hasfun.seoulsubway.common.DateUtil;
-import com.hasfun.seoulsubway.common.IPublicApiResult;
-import com.hasfun.seoulsubway.dto.ArrivalTimeDTO;
 
 public class MainActivity extends Activity implements
 		MapView.OpenAPIKeyAuthenticationResultListener,
 		MapView.MapViewEventListener, MapView.CurrentLocationEventListener,
 		MapView.POIItemEventListener,
-		MapReverseGeoCoder.ReverseGeoCodingResultListener, IPublicApiResult {
+		MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
 	private final Logger log = Logger.getLogger(this.getClass());
 	ArrayAdapter<String> arrayAdapter;
@@ -460,39 +451,6 @@ public class MainActivity extends Activity implements
 		}
 
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void getResult(Object object) {
-		log.info("this method called");
-		ArrivalTimeDTO arrivalTimeDTO = (ArrivalTimeDTO) object;
-		ArrayList<ArrivalTimeDTO.InnerData> datalist = arrivalTimeDTO
-				.getInnerdataList();
-		ArrivalTimeDTO.InnerData data = datalist.get(0);
-		log.info("======row num : " + 0);
-		log.info(data.getArriveTime());
-		log.info(data.getDeststationCode());
-		log.info(data.getDeststationName());
-		log.info(data.getFrCode());
-		log.info(data.getLeftTIme());
-		log.info(data.getStationCd());
-		log.info(data.getSubwayCode());
-		log.info(data.getTrainCode());
-		String arriveTime;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-			Date arriveDate = sdf.parse(data.getArriveTime());
-			Calendar cal = Calendar.getInstance();
-			DateUtil dateUtil = new DateUtil();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			arriveTime = data.getArriveTime();
-			e.printStackTrace();
-
-		}
-		arrayAdapter.add(data.getDeststationName() + "행 : "
-				+ data.getArriveTime());
-
 	}
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////////
