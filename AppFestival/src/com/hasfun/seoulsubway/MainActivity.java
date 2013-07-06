@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import com.hasfun.seoulsubway.common.Constants;
+import com.hasfun.seoulsubway.event.ArrivalTimeEvent;
 
 public class MainActivity extends Activity implements
 		MapView.OpenAPIKeyAuthenticationResultListener,
@@ -49,7 +50,6 @@ public class MainActivity extends Activity implements
 
 		mapView = (MapView) findViewById(R.id.daumMapView);
 		mapView.setDaumMapApiKey(Constants.mapKey);
-
 		mapView.setMapViewEventListener(this);
 		mapView.setOpenAPIKeyAuthenticationResultListener(this);
         mapView.setMapViewEventListener(this);
@@ -77,8 +77,6 @@ public class MainActivity extends Activity implements
 		case MENU_MAP_TYPE: {
 			String hdMapTile = mapView.isHDMapTileEnabled() ? "HD Map Tile Off"
 					: "HD Map Tile On";
-			log.info("---> " + mapView.getZoomLevel());
-			mapView.setZoomLevel(10, false);
 			String[] mapTypeMenuItems = { "Standard", "Satellite", "Hybrid",
 					hdMapTile, "Clear Map Tile Cache" };
 
@@ -475,16 +473,17 @@ public class MainActivity extends Activity implements
 		// mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
 		mapView.setMapCenterPoint(
 				MapPoint.mapPointWithGeoCoord(37.56647, 126.977963), true);
-		mapView.setZoomLevel(7, true);
+		mapView.setZoomLevel(1, true);
 
 		MapPOIItem poiItem2 = new MapPOIItem();
 		poiItem2.setItemName("시청 부근 이벤트정보");
+		poiItem2.setTag(100);
 		poiItem2.setUserObject(String.format("item%d", 2));
 		poiItem2.setMapPoint(MapPoint
 				.mapPointWithGeoCoord(37.56647, 126.977963));
 		poiItem2.setMarkerType(MapPOIItem.MarkerType.CustomImage);
 		poiItem2.setShowAnimationType(MapPOIItem.ShowAnimationType.DropFromHeaven);
-		poiItem2.setCustomImageResourceId(R.drawable.custom_poi_marker_start);
+		poiItem2.setCustomImageResourceId(R.drawable.gpsmapicons);
 		poiItem2.setCustomImageAnchorPointOffset(new MapPOIItem.ImageOffset(22,
 				0));
 		poiItem2.setShowCalloutBalloonOnTouch(true);
@@ -592,7 +591,7 @@ public class MainActivity extends Activity implements
 			MapPOIItem poiItem) {
 
 		String alertMessage = null;
-
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 		if (poiItem == this.poiItem) {
 
 			alertMessage = "Touched the callout-balloon of item1";
@@ -605,7 +604,10 @@ public class MainActivity extends Activity implements
 			alertMessage = String.format(
 					"Touched the callout-balloon of item2 (address : %s)",
 					addressForThisItem);
-
+			alertDialog.setTitle("DaumMapLibrarySample");
+			alertDialog.setMessage(alertMessage);
+			alertDialog.setPositiveButton("OK", null);
+			alertDialog.show();
 		} else if ((poiItem.getUserObject() instanceof String)
 				&& poiItem.getUserObject().equals("item3")) {
 
@@ -615,17 +617,31 @@ public class MainActivity extends Activity implements
 			// return;
 
 		} else if (poiItem.getTag() == 276) {
-
 			alertMessage = "Touched the callout-balloon of item4";
+			// 풍선클릭시 이벤트
+			alertDialog.setTitle("DaumMapLibrarySample");
+			alertDialog.setMessage(alertMessage);
+			alertDialog.setPositiveButton("OK", null);
+			alertDialog.show();
+		} else  if(poiItem.getTag() == 100) {
+			AlertDialog.Builder builderSingle;
+			builderSingle = new AlertDialog.Builder(this);
+			builderSingle.setIcon(R.drawable.ic_launcher);
+			builderSingle.setTitle("서울 시청");
+			arrayAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.select_dialog_item);
+			arrayAdapter.add("시청역 지하철 출발 정보");
+			arrayAdapter.add("문화 이벤트 정보");
+			builderSingle.setNegativeButton("닫기", 
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			builderSingle.setAdapter(arrayAdapter, new ArrivalTimeEvent(this));
+			builderSingle.show();
 		}
-
-		// 풍선클릭시 이벤트
-
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-		alertDialog.setTitle("DaumMapLibrarySample");
-		alertDialog.setMessage(alertMessage);
-		alertDialog.setPositiveButton("OK", null);
-		alertDialog.show();
 	}
 
 	@Override

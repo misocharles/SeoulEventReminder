@@ -11,12 +11,11 @@ import org.apache.log4j.Logger;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 
-import com.hasfun.seoulsubway.MainActivity;
 import com.hasfun.seoulsubway.R;
 import com.hasfun.seoulsubway.common.IPublicApiResult;
 import com.hasfun.seoulsubway.dto.ArrivalTimeDTO;
@@ -33,42 +32,77 @@ public class ArrivalTimeEvent implements OnClickListener, IPublicApiResult {
 	}
 
 	@Override
-	public void onClick(View v) {
-		AsyncTask<String, Void, String> data = new SearchArrivalTask(this);
-		try{
-			// 지하철 코드 , (상행,내선:1, 하행,외선:2) , 요일(평일:1, 토요일:2, 휴일/일요일:3)
-			String[] stationInfo = { "0151", "1", "3" };
-			data.execute(stationInfo);
-			String[] stationInfo2 = { "0151", "2", "3" };
-			data.execute(stationInfo2);
-			String[] stationInfo3 = { "0201", "1", "3" };
-			data.execute(stationInfo3);
-			String[] stationInfo4 = { "0201", "2", "3" };
-			data.execute(stationInfo4);
-		} catch(Exception e){
-			e.printStackTrace();
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		if (which == 0) {
+			AsyncTask<String, Void, String> data = new SearchArrivalTask(this);
+			try {
+				// 지하철 코드 , (상행,내선:1, 하행,외선:2) , 요일(평일:1, 토요일:2, 휴일/일요일:3)
+				String[] stationInfo = { "0151", "1", "3" };
+				data.execute(stationInfo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				String[] stationInfo2 = { "0151", "2", "3" };
+				data.execute(stationInfo2);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				String[] stationInfo3 = { "0201", "1", "3" };
+				data.execute(stationInfo3);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				String[] stationInfo4 = { "0201", "2", "3" };
+				data.execute(stationInfo4);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			builderSingle = new AlertDialog.Builder(mActivity);
+			builderSingle.setIcon(R.drawable.ic_launcher);
+			builderSingle.setTitle("공공 API");
+			arrayAdapter = new ArrayAdapter<String>(mActivity,
+					android.R.layout.select_dialog_item);
+			arrayAdapter.add("조회할 데이터가 없습니다.");
+			builderSingle.setNegativeButton("닫기",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			builderSingle.setAdapter(arrayAdapter, null);
+			builderSingle.show();
+		} else {
+			builderSingle = new AlertDialog.Builder(mActivity);
+			builderSingle.setIcon(R.drawable.ic_launcher);
+			builderSingle.setTitle("서울시청 통통투어");
+			arrayAdapter = new ArrayAdapter<String>(mActivity,
+					android.R.layout.select_dialog_item);
+
+			builderSingle.setMessage("서울시청 시티갤러리(지하1층) 무료 \n 접수중 ");
+			builderSingle.setNegativeButton("닫기",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			builderSingle.show();
 		}
-		builderSingle = new AlertDialog.Builder(mActivity);
-		builderSingle.setIcon(R.drawable.ic_launcher);
-		builderSingle.setTitle("조회할 데이터가 없습니다.");
-		arrayAdapter = new ArrayAdapter<String>(mActivity,
-				android.R.layout.select_dialog_item);
-		builderSingle.setNegativeButton("닫기",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
-		builderSingle.setAdapter(arrayAdapter, null);
-		builderSingle.show();
 	}
-	
+
 	@Override
 	public void getResult(Object object) {
 		log.info("this method called");
-		if (object == null ) return;
-		builderSingle.setTitle("공공API"); 
+		if (object == null)
+			return;
+		
+		arrayAdapter.remove("조회할 데이터가 없습니다.");
 		ArrivalTimeDTO arrivalTimeDTO = (ArrivalTimeDTO) object;
 		ArrayList<ArrivalTimeDTO.InnerData> datalist = arrivalTimeDTO
 				.getInnerdataList();
