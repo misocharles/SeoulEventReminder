@@ -13,11 +13,11 @@ import de.mindpipe.android.logging.log4j.LogConfigurator;
 public class ConfigureLog4J {
 	public static void configure() {
         final LogConfigurator logConfigurator = new LogConfigurator();
-        logConfigurator.setFileName(Constants.mSdPath + File.separator + "ilovefashion" + File.separator + "log.log");
+        logConfigurator.setFileName(Constants.mSdPath + File.separator + "seoulsubway" + File.separator + "log.log");
         logConfigurator.setRootLevel(Level.DEBUG);
         // Set log level of a specific logger
         logConfigurator.setLevel("org.apache", Level.ERROR);
-        logConfigurator.setLevel("com.interwater", Level.DEBUG);
+        logConfigurator.setLevel("com.hasfun.seoulsubway", Level.DEBUG);
         logConfigurator.configure();
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import android.os.AsyncTask;
 
+
 public class PostJsonTask extends AsyncTask<String, Void, String> {
 	private final Logger log = Logger.getLogger(this.getClass());
 	private String type = "";
@@ -74,11 +75,12 @@ public class PostJsonTask extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected void onPostExecute(String result) {
-		if (this.type.equals("login") && result != null) {
-			/*ObjectMapper om = new ObjectMapper();
+		/*if (this.type.equals("login") && result != null) {
+			ObjectMapper om = new ObjectMapper();
 			Map<String, String> map = null;
 			try {
 				map = om.readValue(result, Map.class);
+				// ?�음 처리 
 			} catch (JsonParseException e) {
 				// TODO Auto-generated catch block
 				log.error(e);
@@ -88,7 +90,7 @@ public class PostJsonTask extends AsyncTask<String, Void, String> {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				log.error(e);
-			}*/
-		}
+			}
+		}*/
 	}
 }
