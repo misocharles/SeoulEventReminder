@@ -56,13 +56,15 @@ public class CreateNote extends ParentActivity {
   @Override
   public void onResume() {
     super.onResume();
-    Intent intent = getIntent(); // ¿Ã æ◊∆º∫Ò∆º∏¶ Ω√¿€«œ∞‘ «— ¿Œ≈Ÿ∆Æ∏¶ »£√‚
+    Intent intent = getIntent();
+    if(intent == null) {
+    	Log.e(LOGTAG,"Ìóê"); 
+    }
+    Log.d(LOGTAG, intent.getStringExtra("title"));
+    Log.d(LOGTAG, intent.getStringExtra("content"));
     
-    Log.d(LOGTAG, intent.getStringExtra("data_name"));
-    Log.d(LOGTAG, intent.getStringExtra("data_digit"));
-    
-    mEditTextTitle.setText(intent.getStringExtra("data_name"));
-    mEditTextTitle.setText(intent.getStringExtra("data_digit"));
+    mEditTextTitle.setText(intent.getStringExtra("title"));
+    mEditTextContent.setText(intent.getStringExtra("content"));
   }
   
   /**
