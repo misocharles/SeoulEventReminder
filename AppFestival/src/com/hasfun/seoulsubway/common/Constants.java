@@ -1,8 +1,5 @@
 package com.hasfun.seoulsubway.common;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import com.hasfun.seoulsubway.base.BaseActivity;
 
 import android.os.Environment;
@@ -19,18 +16,7 @@ public class Constants {
 	
 	public static final String mSdPath = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ? Environment.getExternalStorageDirectory().getAbsolutePath() : Environment.MEDIA_UNMOUNTED;
 	
-	private static final Properties config = new Properties(); 
-	static { 
-		try { 
-			config.load(Constants.class.getClassLoader().getResourceAsStream("local.properties")); 
-		} catch (IOException e) { 
-			e.printStackTrace(); 
-		} 
-	} 
-
-	public static final String EVERNOTE_KEY = config.getProperty("evernote.key");
-	public static final String EVERNOTE_SECRET = config.getProperty("evernote.secret");
-	public static final String mapKey = config.getProperty("daum.map.key");
-	public static final String PublicApiKey = config.getProperty("data.seoul.key");
-
+	public static final String mapKey = "18836643ed133d7dc1615a773d00076e4faa7dca";
+	
+	public static final String PublicApiKey = "4150495f32313130626967656e697573";
 }
