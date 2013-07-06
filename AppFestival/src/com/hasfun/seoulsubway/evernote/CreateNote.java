@@ -49,20 +49,20 @@ public class CreateNote extends ParentActivity {
     mBtnSelect = (Button) findViewById(R.id.select_button);
     mBtnSave = (Button) findViewById(R.id.save_button);
     
-    // Login 체크
+    // Login
     mEvernoteSession.authenticate(this);
   }
   
   @Override
   public void onResume() {
     super.onResume();
-    Intent intent = getIntent(); // 이 액티비티를 시작하게 한 인텐트를 호출
+    Intent intent = getIntent(); //
     
-    Log.d(LOGTAG, intent.getStringExtra("data_name"));
-    Log.d(LOGTAG, intent.getStringExtra("data_digit"));
+    Log.d(LOGTAG, intent.getStringExtra("title"));
+    Log.d(LOGTAG, intent.getStringExtra("content"));
     
-    mEditTextTitle.setText(intent.getStringExtra("data_name"));
-    mEditTextTitle.setText(intent.getStringExtra("data_digit"));
+    mEditTextTitle.setText(intent.getStringExtra("title"));
+    mEditTextContent.setText(intent.getStringExtra("content"));
   }
   
   /**
