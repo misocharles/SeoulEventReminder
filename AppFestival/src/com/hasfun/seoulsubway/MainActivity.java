@@ -77,6 +77,8 @@ public class MainActivity extends Activity implements
 		case MENU_MAP_TYPE: {
 			String hdMapTile = mapView.isHDMapTileEnabled() ? "HD Map Tile Off"
 					: "HD Map Tile On";
+			log.info("---> " + mapView.getZoomLevel());
+			mapView.setZoomLevel(10, false);
 			String[] mapTypeMenuItems = { "Standard", "Satellite", "Hybrid",
 					hdMapTile, "Clear Map Tile Cache" };
 
