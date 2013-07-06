@@ -1,4 +1,4 @@
-package net.hasfun.appfestival.common;
+package com.hasfun.seoulsubway.common;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class PostJsonTask extends AsyncTask<String, Void, String> {
 			// Make the network request, posting the message, expecting a
 			// String in response from the server
 			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
-			log.info("정상 처리 완료");
+			log.info("?�상 처리 ?�료");
 			res = response.getBody();
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -83,7 +83,7 @@ public class PostJsonTask extends AsyncTask<String, Void, String> {
 			Map<String, String> map = null;
 			try {
 				map = om.readValue(result, Map.class);
-				// 다음 처리 
+				// ?�음 처리 
 			} catch (JsonParseException e) {
 				// TODO Auto-generated catch block
 				log.error(e);

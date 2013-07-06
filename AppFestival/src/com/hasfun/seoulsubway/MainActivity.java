@@ -1,4 +1,4 @@
-package net.hasfun.appfestival;
+package com.hasfun.seoulsubway;
 
 import android.os.Bundle;
 import android.app.Activity;

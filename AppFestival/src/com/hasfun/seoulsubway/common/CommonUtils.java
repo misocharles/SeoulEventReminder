@@ -1,4 +1,4 @@
-package net.hasfun.appfestival.common;
+package com.hasfun.seoulsubway.common;
 
 import java.io.File;
 import java.util.Date;
@@ -20,7 +20,7 @@ public class CommonUtils {
 	
 	public static void init(Context context){
 		mContext = context;
-		// vibrate ê´€ë ¨ ì„¤ì •
+		// vibrate ê´? ¨ ?¤ì •
 		mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
 	}
 	

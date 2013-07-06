@@ -1,4 +1,4 @@
-package net.hasfun.appfestival.common;
+package com.hasfun.seoulsubway.common;
 
 import java.io.File;
 import org.apache.log4j.Level;

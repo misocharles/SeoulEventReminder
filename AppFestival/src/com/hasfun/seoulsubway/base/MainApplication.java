@@ -1,15 +1,16 @@
-package net.hasfun.appfestival.base;
+package com.hasfun.seoulsubway.base;
 
 
-import net.hasfun.appfestival.common.CommonUtils;
-import net.hasfun.appfestival.common.ConfigureLog4J;
-import net.hasfun.appfestival.common.Constants;
-import net.hasfun.appfestival.common.Pref;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.crypto.encrypt.AndroidEncryptors;
 import org.springframework.social.connect.sqlite.SQLiteConnectionRepository;
 import org.springframework.social.connect.sqlite.support.SQLiteConnectionRepositoryHelper;
+
+import com.hasfun.seoulsubway.common.CommonUtils;
+import com.hasfun.seoulsubway.common.ConfigureLog4J;
+import com.hasfun.seoulsubway.common.Constants;
+import com.hasfun.seoulsubway.common.Pref;
 
 import android.app.Application;
 import android.content.BroadcastReceiver;

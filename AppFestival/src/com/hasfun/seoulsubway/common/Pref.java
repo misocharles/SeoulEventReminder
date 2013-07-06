@@ -1,7 +1,7 @@
 /*
  * 
  */
-package net.hasfun.appfestival.common;
+package com.hasfun.seoulsubway.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -56,7 +56,7 @@ public class Pref
 	
 	public static final String PREF_PUSH_YN = "pushYn";
 	/**
-	 * 최초실행정보 가져오기
+	 * 최초?�행?�보 �?��?�기
 	 * <p>.
 	 *
 	 * @return the first exec
@@ -71,7 +71,7 @@ public class Pref
 	
 	
 	/**
-	 * 최초실행정보 저장하기.
+	 * 최초?�행?�보 ??��?�기.
 	 *
 	 * @param value the value
 	 * @return true, if successful
@@ -133,8 +133,8 @@ public class Pref
 	}
 	
 	/**
-	 * 중요 context init shared Preferences 를 이용 하기 위해서는 어플이 구동될때 init명령어를 실행 시켜
-	 * 주어야 한다.
+	 * 중요 context init shared Preferences �??�용 ?�기 ?�해?�는 ?�플??구동?�때 init명령?��? ?�행 ?�켜
+	 * 주어???�다.
 	 *
 	 * @param context the context
 	 */
@@ -146,8 +146,7 @@ public class Pref
 	
 	/**
 	 * *******************************************************
-	 * SharedPreferences 조작 메소드
-	 * *******************************************************.
+	 * SharedPreferences 조작 메소??	 * *******************************************************.
 	 *
 	 * @param filename the filename
 	 * @param key the key
@@ -156,7 +155,7 @@ public class Pref
 	 */
 	
 	/**
-	 * SharedPreference 가져오기
+	 * SharedPreference �?��?�기
 	 * <p>.
 	 *
 	 * @param filename the filename
@@ -172,7 +171,7 @@ public class Pref
 	}
 
 	/**
-	 * SharedPreferences.Editor 가져오기
+	 * SharedPreferences.Editor �?��?�기
 	 * <p>
 	 *
 	 * @param filename the filename

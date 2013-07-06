@@ -1,4 +1,4 @@
-package net.hasfun.appfestival.common;
+package com.hasfun.seoulsubway.common;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;

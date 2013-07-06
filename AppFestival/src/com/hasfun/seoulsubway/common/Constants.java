@@ -1,6 +1,7 @@
-package net.hasfun.appfestival.common;
+package com.hasfun.seoulsubway.common;
 
-import net.hasfun.appfestival.base.BaseActivity;
+import com.hasfun.seoulsubway.base.BaseActivity;
+
 import android.os.Environment;
 import android.webkit.WebView;
 

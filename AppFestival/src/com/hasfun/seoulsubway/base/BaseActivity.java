@@ -1,6 +1,7 @@
-package net.hasfun.appfestival.base;
+package com.hasfun.seoulsubway.base;
 
-import net.hasfun.appfestival.common.Constants;
+import com.hasfun.seoulsubway.common.Constants;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -55,7 +56,7 @@ public class BaseActivity extends Activity{
 			this.progressDialog.setMessage(message);
 			this.progressDialog.show();
 		} catch (Exception e){
-			// error 발생시 걍 무시 
+			// error 발생??�?무시 
 		}
 	}
 	
@@ -63,7 +64,7 @@ public class BaseActivity extends Activity{
 		try {
 			this.progressDialog.setProgress(progress);
 		}catch (Exception e){
-			// error 발생시 걍 무시
+			// error 발생??�?무시
 		}
 	}
 	public void dismissProgressDialog() {
@@ -72,7 +73,7 @@ public class BaseActivity extends Activity{
 				this.progressDialog.dismiss();
 			}
 		}catch (Exception e){
-			// error 발생시 걍 무시
+			// error 발생??�?무시
 		}
 	}
 }
