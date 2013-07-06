@@ -56,8 +56,7 @@ public class CreateNote extends ParentActivity {
   @Override
   public void onResume() {
     super.onResume();
-    Intent intent = getIntent(); //
-    
+    Intent intent = getIntent();
     Log.d(LOGTAG, intent.getStringExtra("title"));
     Log.d(LOGTAG, intent.getStringExtra("content"));
     

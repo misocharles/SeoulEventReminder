@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import com.hasfun.seoulsubway.R;
 import com.hasfun.seoulsubway.common.IPublicApiResult;
 import com.hasfun.seoulsubway.dto.ArrivalTimeDTO;
+import com.hasfun.seoulsubway.evernote.CreateNote;
 import com.hasfun.seoulsubway.servercall.SearchArrivalTask;
 
 public class ArrivalTimeEvent implements OnClickListener, IPublicApiResult {
@@ -35,28 +37,32 @@ public class ArrivalTimeEvent implements OnClickListener, IPublicApiResult {
 	public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
 		if (which == 0) {
-			AsyncTask<String, Void, String> data = new SearchArrivalTask(this);
+			AsyncTask<String, Void, String> data = null;
 			try {
 				// 지하철 코드 , (상행,내선:1, 하행,외선:2) , 요일(평일:1, 토요일:2, 휴일/일요일:3)
 				String[] stationInfo = { "0151", "1", "3" };
+				data = new SearchArrivalTask(this);
 				data.execute(stationInfo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			try {
 				String[] stationInfo2 = { "0151", "2", "3" };
+				data = new SearchArrivalTask(this);
 				data.execute(stationInfo2);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			try {
 				String[] stationInfo3 = { "0201", "1", "3" };
+				data = new SearchArrivalTask(this);
 				data.execute(stationInfo3);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			try {
 				String[] stationInfo4 = { "0201", "2", "3" };
+				data = new SearchArrivalTask(this);
 				data.execute(stationInfo4);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -85,11 +91,23 @@ public class ArrivalTimeEvent implements OnClickListener, IPublicApiResult {
 					android.R.layout.select_dialog_item);
 
 			builderSingle.setMessage("서울시청 시티갤러리(지하1층) 무료 \n 접수중 ");
+			
 			builderSingle.setNegativeButton("닫기",
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
+						}
+					});
+			builderSingle.setPositiveButton("evernote에 기록하기",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							Intent intent = new Intent(mActivity, CreateNote.class);
+							intent.putExtra("title", "서울시청 통통투어");
+							intent.putExtra("content", "서울시청 시티갤러리(지하1층) 무료 \n 접수중");
+							mActivity.startActivity(intent);
 						}
 					});
 			builderSingle.show();
