@@ -49,7 +49,7 @@ public class CreateNote extends ParentActivity {
     mBtnSelect = (Button) findViewById(R.id.select_button);
     mBtnSave = (Button) findViewById(R.id.save_button);
     
-    // Login üũ
+    // Login
     mEvernoteSession.authenticate(this);
   }
   
@@ -60,6 +60,12 @@ public class CreateNote extends ParentActivity {
     if(intent == null) {
     	Log.e(LOGTAG,"헐"); 
     }
+    Log.d(LOGTAG, intent.getStringExtra("title"));
+    Log.d(LOGTAG, intent.getStringExtra("content"));
+    Intent intent = getIntent(); //
+    
+    mEditTextTitle.setText(intent.getStringExtra("title"));
+    mEditTextContent.setText(intent.getStringExtra("content"));
     Log.d(LOGTAG, intent.getStringExtra("title"));
     Log.d(LOGTAG, intent.getStringExtra("content"));
     
