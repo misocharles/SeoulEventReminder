@@ -17,6 +17,7 @@ public class ArrivalTimeDTO {
 	
 	private ArrayList<InnerData> innerdata;
 	private	String inout;
+	private	String station;
 	
 	
 	public ArrivalTimeDTO(){
@@ -47,6 +48,16 @@ public class ArrivalTimeDTO {
 
 	public void setInout(String inout) {
 		this.inout = inout;
+	}
+
+	public String getStation() {
+		return station;
+	}
+
+
+
+	public void setStation(String station) {
+		this.station = station;
 	}
 
 	public class InnerData {
