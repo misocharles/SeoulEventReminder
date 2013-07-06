@@ -25,6 +25,7 @@ import com.hasfun.seoulsubway.servercall.SearchArrivalTask;
 public class ArrivalTimeEvent implements OnClickListener, IPublicApiResult {
 	private Activity mActivity;
 	private ArrayAdapter<String> arrayAdapter;
+	private AlertDialog.Builder builderSingle;
 	private final Logger log = Logger.getLogger(this.getClass());
 
 	public ArrivalTimeEvent(Activity activity) {
@@ -34,19 +35,22 @@ public class ArrivalTimeEvent implements OnClickListener, IPublicApiResult {
 	@Override
 	public void onClick(View v) {
 		AsyncTask<String, Void, String> data = new SearchArrivalTask(this);
-		// 지하철 코드 , (상행,내선:1, 하행,외선:2) , 요일(평일:1, 토요일:2, 휴일/일요일:3)
-		String[] stationInfo = { "0151", "1", "3" };
-		data.execute(stationInfo);
-		String[] stationInfo2 = { "0151", "2", "3" };
-		data.execute(stationInfo2);
-		String[] stationInfo3 = { "0201", "1", "3" };
-		data.execute(stationInfo3);
-		String[] stationInfo4 = { "0201", "2", "3" };
-		data.execute(stationInfo4);
-
-		AlertDialog.Builder builderSingle = new AlertDialog.Builder(mActivity);
+		try{
+			// 지하철 코드 , (상행,내선:1, 하행,외선:2) , 요일(평일:1, 토요일:2, 휴일/일요일:3)
+			String[] stationInfo = { "0151", "1", "3" };
+			data.execute(stationInfo);
+			String[] stationInfo2 = { "0151", "2", "3" };
+			data.execute(stationInfo2);
+			String[] stationInfo3 = { "0201", "1", "3" };
+			data.execute(stationInfo3);
+			String[] stationInfo4 = { "0201", "2", "3" };
+			data.execute(stationInfo4);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		builderSingle = new AlertDialog.Builder(mActivity);
 		builderSingle.setIcon(R.drawable.ic_launcher);
-		builderSingle.setTitle("");
+		builderSingle.setTitle("조회할 데이터가 없습니다.");
 		arrayAdapter = new ArrayAdapter<String>(mActivity,
 				android.R.layout.select_dialog_item);
 		builderSingle.setNegativeButton("닫기",
@@ -63,6 +67,8 @@ public class ArrivalTimeEvent implements OnClickListener, IPublicApiResult {
 	@Override
 	public void getResult(Object object) {
 		log.info("this method called");
+		if (object == null ) return;
+		builderSingle.setTitle("공공API"); 
 		ArrivalTimeDTO arrivalTimeDTO = (ArrivalTimeDTO) object;
 		ArrayList<ArrivalTimeDTO.InnerData> datalist = arrivalTimeDTO
 				.getInnerdataList();

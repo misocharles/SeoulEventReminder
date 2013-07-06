@@ -18,12 +18,12 @@ import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
 import com.hasfun.seoulsubway.R;
+import com.hasfun.seoulsubway.common.Constants;
 import com.hasfun.seoulsubway.common.IPublicApiResult;
 import com.hasfun.seoulsubway.dto.ArrivalTimeDTO;
 
 public class SearchArrivalTask extends AsyncTask<String, Void, String> {
 	private final Logger log = Logger.getLogger(this.getClass());
-	private String url = "";
 	private ArrivalTimeDTO arrivalTimeDTO = null;
 	private IPublicApiResult iPublicApiResult = null; 
 	private String stationCode = null;
@@ -36,7 +36,6 @@ public class SearchArrivalTask extends AsyncTask<String, Void, String> {
 	}
 
 	public SearchArrivalTask(IPublicApiResult iPublicApiResult) {
-		this.url = url;
 		this.iPublicApiResult = iPublicApiResult;
 	}
 
@@ -46,7 +45,7 @@ public class SearchArrivalTask extends AsyncTask<String, Void, String> {
 		String res = "";
 		try {
 			String serverString = "";
-			String url = "http://openapi.seoul.go.kr:8088/4150495f32313130626967656e697573/json/SearchArrivalTimeOfLine2SubwayByIDService/1/1";
+			String url = "http://openapi.seoul.go.kr:8088/"+Constants.PublicApiKey+"/json/SearchArrivalTimeOfLine2SubwayByIDService/1/1";
 			this.stationCode = params[0];
 			String inout = params[1]; 
 			String daytype = params[2];

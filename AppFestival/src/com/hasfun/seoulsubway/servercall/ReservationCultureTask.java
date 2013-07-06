@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 
+import com.hasfun.seoulsubway.common.Constants;
 import com.hasfun.seoulsubway.common.IPublicApiResult;
 import com.hasfun.seoulsubway.dto.ArrivalTimeDTO;
 import com.hasfun.seoulsubway.dto.ReservationCultureDTO;
@@ -43,7 +44,7 @@ public class ReservationCultureTask extends AsyncTask<String, Void, String> {
 		String res = "";
 		try {
 			String serverString = "";
-			String url = "http://openapi.seoul.go.kr:8088/4150495f32313130626967656e697573/json/ListPublicReservationCulture/1/100/";
+			String url = "http://openapi.seoul.go.kr:8088/"+Constants.PublicApiKey+"/json/ListPublicReservationCulture/1/100/";
 			String finalUrl = url ;
 			// Create Request to server and get response
 			HttpClient client = new DefaultHttpClient();
