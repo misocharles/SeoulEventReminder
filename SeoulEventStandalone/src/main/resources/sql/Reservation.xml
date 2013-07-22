@@ -3,7 +3,38 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="com.interwater.fashion.standalone.dao.ReservationDAO">
-	<select id="productSelect" parameterType="String" resultType="String">
-	</select>
+<mapper namespace="com.hasfun.seoulevent.standalone.dao.ReservationDAO">
+	<insert id="insertReservation" parameterType="java.util.Map">
+	    insert into seoulevent
+	         ( 	GUBUN
+				, SVCID
+				, MAXCLASSNM
+				, MINCLASSNM
+				, SVCSTATNM
+				, SVCNM
+				, PAYATNM
+				, PLACENM
+				, USETGTINFO
+				, SVCURL
+				, LAT
+				, LON
+			)
+		values (
+				#{GUBUN}
+				, #{SVCID}
+				, #{MAXCLASSNM}
+				, #{MINCLASSNM}
+				, #{SVCSTATNM}
+				, #{SVCNM}
+				, #{PAYATNM}
+				, #{PLACENM}
+				, #{USETGTINFO}
+				, #{SVCURL}
+				, #{LAT}
+				, #{LON}
+		)
+	</insert>
+	<delete id="deleteReservation" parameterType="String">
+	    delete from seoulevent where GUBUN = #{gubun}
+	</delete>
 </mapper>

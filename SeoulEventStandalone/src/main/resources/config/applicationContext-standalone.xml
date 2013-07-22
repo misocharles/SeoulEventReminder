@@ -58,6 +58,10 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
+	<bean id="ReservationDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.hasfun.seoulevent.standalone.dao.ReservationDAO" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 	
 	<bean id="ReservationService" class="com.hasfun.seoulevent.standalone.service.ReservationServiceImpl" />
 </beans>

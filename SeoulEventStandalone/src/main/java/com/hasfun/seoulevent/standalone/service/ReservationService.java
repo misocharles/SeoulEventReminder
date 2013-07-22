@@ -5,5 +5,5 @@ import java.io.IOException;
 import org.apache.http.client.ClientProtocolException;
 
 public interface ReservationService {
-	public void getCulture() throws ClientProtocolException, IOException;
+	public void getReservation() throws ClientProtocolException, IOException;
 }
