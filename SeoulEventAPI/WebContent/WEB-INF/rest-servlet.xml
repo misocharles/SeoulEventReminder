@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx
+       	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		"> 
+	<context:annotation-config /><!-- 어노테이션 사용 하도록 설정 -->
+	
+	<tx:annotation-driven  transaction-manager="transactionManager" /> <!-- test -->
+	
+	<!-- 
+	<context:component-scan base-package="com.interwater.fashion.controller">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	 -->
+	<!-- To enable @RequestMapping process on type level and method level -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >
+	</bean>
+	
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" /> -->
+	<!-- output으로 던져 주는 놈을json type 으로 변경 시키기 위한 Wrapper -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+   
+	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+	
+	<!-- <bean id="jsonConverterWrapper" class="com.interwater.fashion.common.JsonConverterWrapper" /> -->
+	
+	<bean id="beanNameResolver"
+       class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+	
+	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	
+	<!-- <bean id="ExceptionResolver" class="com.interwater.fashion.common.ExceptionResolver"/>
+	
+	Exception mapping
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="ExceptionResolver">
+		</property>
+	</bean> -->
+	
+	<!-- ================ Controller Mapping ================ -->
+	<bean id="RestController" class="com.hasfun.seoulevent.controller.RestController"/>
+	
+	<!-- ================ Setvice Mapping ================ -->
+	<bean id="RestService"	class="com.hasfun.seoulevent.service.RestServiceImpl" />
+</beans>
